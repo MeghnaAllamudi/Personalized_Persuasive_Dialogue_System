@@ -1,0 +1,14 @@
+{
+  "authority": [
+    {
+      "user_message": "I don't care about your rules!",
+      "agent_response": "I understand your frustration. These policies are in place to ensure everyone's safety. Let's work within that framework to find a solution.",
+      "strategy": "authority"
+    },
+    {
+      "user_message": "You can't tell me what to do!",
+      "agent_response": "You're right that this is your choice. I'm here to explain the guidelines and help you make an informed decision that works for you.",
+      "strategy": "authority"
+    }
+  ]
+}
