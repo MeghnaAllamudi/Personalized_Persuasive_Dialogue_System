@@ -32,22 +32,31 @@ axes[0].legend()
 axes[0].tick_params(axis='x', rotation=45)
 
 # Panel B: t-SNE visualization of persona embeddings
-# Re-generate embeddings for visualization
-from models.persona_simulator import PersonaSimulator
+# Re-generate embeddings for visualization  
+from models.casino_persona_simulator import CasinoPersonaSimulator
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
-encoder = SentenceTransformer('all-MiniLM-L6-v2')
-test_prompt = "I understand you've been waiting. Let me explain what we need to proceed."
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+test_prompt = "I really need firewood for my group. What supplies are you most interested in?"
 
 all_responses = []
 all_labels = []
 for persona in personas:
     for trial in range(5):
-        simulator = PersonaSimulator(persona, model="gpt-4o-mini")
+        simulator = CasinoPersonaSimulator(persona, model="gpt-4o-mini")
         response = simulator.get_response(test_prompt)
         all_responses.append(response)
         all_labels.append(persona)
 
-embeddings = encoder.encode(all_responses)
+response = client.embeddings.create(
+    model="text-embedding-3-small",
+    input=all_responses
+)
+embeddings = np.array([item.embedding for item in response.data])
 tsne = TSNE(n_components=2, random_state=42, perplexity=15)
 embeddings_2d = tsne.fit_transform(embeddings)
 
@@ -91,13 +100,13 @@ strategies_sequence = [
 ]
 
 for persona in personas:
-    simulator = PersonaSimulator(persona, model="gpt-4o-mini")
+    simulator = CasinoPersonaSimulator(persona, model="gpt-4o-mini")
     sentiments = []
     conversation = []
     
     for strategies in strategies_sequence:
         agent_msg = generator.generate_response(conversation, strategies)
-        user_msg = simulator.get_response(agent_msg, strategies)
+        user_msg = simulator.get_response(agent_msg)
         
         sentiment = get_sentiment(user_msg)
         sentiments.append(sentiment)

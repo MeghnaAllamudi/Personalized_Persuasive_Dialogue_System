@@ -1,7 +1,7 @@
 import sys
 sys.path.append('.')
 from models.strategy_generator import StrategyPromptedGenerator
-from models.persona_simulator import PersonaSimulator
+from models.casino_persona_simulator import CasinoPersonaSimulator
 
 def test_conversation(persona_type, strategy_sequence):
     """Test a full conversation with strategy-persona interaction"""
@@ -11,16 +11,12 @@ def test_conversation(persona_type, strategy_sequence):
     print('='*80)
     
     generator = StrategyPromptedGenerator(model="gpt-4o-mini")
-    simulator = PersonaSimulator(persona_type, model="gpt-4o-mini")
+    simulator = CasinoPersonaSimulator(persona_type, model="gpt-4o-mini")
     
     conversation_history = []
     
-    # Initial user message from scenario
-    initial_message = simulator.scenario
-    print(f"\nScenario: {initial_message}")
-    
-    # Get initial user message from persona based on scenario
-    initial_user_msg = simulator.get_initial_message()
+    # Initial greeting for casino negotiation
+    initial_user_msg = "Hello! Let's talk about the camping supplies."
     print(f"\nUser (initial): {initial_user_msg}")
     
     # Add initial user message to history
@@ -39,7 +35,7 @@ def test_conversation(persona_type, strategy_sequence):
         print(f"Agent: {agent_msg}")
         
         # Persona responds
-        user_msg = simulator.get_response(agent_msg, strategies)
+        user_msg = simulator.get_response(agent_msg)
         print(f"User: {user_msg}")
         
         # Update history (update last turn's agent response and add new user message)
@@ -52,15 +48,15 @@ def test_conversation(persona_type, strategy_sequence):
     return conversation_history
 
 if __name__ == '__main__':
-    # Test 1: Aggressive persona with empathy -> validation
+    # Test 1: Competitive bargainer with empathy -> validation
     test_conversation(
-        'aggressive',
+        'competitive_bargainer',
         [['empathy'], ['empathy', 'validation'], ['problem_solving']]
     )
     
-    # Test 2: Cooperative persona with active listening
+    # Test 2: Empathetic trader with active listening
     test_conversation(
-        'cooperative',
+        'empathetic_trader',
         [['active_listening'], ['validation'], ['problem_solving']]
     )
     

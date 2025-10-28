@@ -1,10 +1,23 @@
 import sys
+import os
 sys.path.append('.')
-from models.persona_simulator import PersonaSimulator
-from sentence_transformers import SentenceTransformer
+from models.casino_persona_simulator import CasinoPersonaSimulator
+from dotenv import load_dotenv
+from openai import OpenAI
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import json
+
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+def get_embeddings(texts):
+    """Get embeddings using OpenAI API"""
+    response = client.embeddings.create(
+        model="text-embedding-3-small",
+        input=texts
+    )
+    return np.array([item.embedding for item in response.data])
 
 def test_persona_consistency(persona_type, test_prompt, num_trials=5):
     """Test if persona gives consistent responses"""
@@ -13,14 +26,13 @@ def test_persona_consistency(persona_type, test_prompt, num_trials=5):
     
     responses = []
     for trial in range(num_trials):
-        simulator = PersonaSimulator(persona_type, model="gpt-4o-mini")
+        simulator = CasinoPersonaSimulator(persona_type, model="gpt-4o-mini")
         response = simulator.get_response(test_prompt)
         responses.append(response)
         print(f"  Trial {trial+1}: {response}")
     
     # Measure similarity using embeddings
-    encoder = SentenceTransformer('all-MiniLM-L6-v2')
-    embeddings = encoder.encode(responses)
+    embeddings = get_embeddings(responses)
     
     # Compute pairwise similarities
     similarities = []
@@ -44,19 +56,19 @@ def test_inter_persona_diversity(test_prompt):
     
     print(f"\nTesting inter-persona diversity...")
     
-    personas = ['aggressive', 'cooperative', 'anxious', 'stubborn', 'diplomatic']
+    personas = ['competitive_bargainer', 'empathetic_trader', 'strategic_negotiator', 
+                'flexible_collaborator', 'assertive_claimer']
     persona_responses = {}
     
     for persona_type in personas:
-        simulator = PersonaSimulator(persona_type, model="gpt-4o-mini")
+        simulator = CasinoPersonaSimulator(persona_type, model="gpt-4o-mini")
         response = simulator.get_response(test_prompt)
         persona_responses[persona_type] = response
         print(f"  {persona_type}: {response}")
     
     # Measure diversity using embeddings
-    encoder = SentenceTransformer('all-MiniLM-L6-v2')
     responses_list = list(persona_responses.values())
-    embeddings = encoder.encode(responses_list)
+    embeddings = get_embeddings(responses_list)
     
     # Compute average distance between personas
     distances = []
@@ -75,11 +87,12 @@ def test_inter_persona_diversity(test_prompt):
     }
 
 if __name__ == '__main__':
-    test_prompt = "I understand you've been waiting. Let me explain what we need to proceed."
+    test_prompt = "I really need firewood for my group. What supplies are you most interested in?"
     
     # Test consistency within each persona
     consistency_results = []
-    for persona in ['aggressive', 'cooperative', 'anxious', 'stubborn', 'diplomatic']:
+    for persona in ['competitive_bargainer', 'empathetic_trader', 'strategic_negotiator', 
+                    'flexible_collaborator', 'assertive_claimer']:
         result = test_persona_consistency(persona, test_prompt, num_trials=5)
         consistency_results.append(result)
     

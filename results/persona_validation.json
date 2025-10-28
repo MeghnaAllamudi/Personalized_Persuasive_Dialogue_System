@@ -1,69 +1,69 @@
 {
   "consistency": [
     {
-      "persona": "aggressive",
+      "persona": "competitive_bargainer",
       "responses": [
-        "Listen, I've been stuck here for over an hour, and all I get is \"let me explain?\" That's not good enough! I have a meeting that matters, and you need to do something about this\u2014not just talk! What's it going to take to get me through this checkpoint?",
-        "I've wasted over an hour here while my time is being disrespected! I don't want to hear your excuses; I just want to know why this is taking so long. Can\u2019t you just do your job and let me through?",
-        "I don't want to hear your excuses! I've been sitting here wasting my time for over an hour while you all just stand around. I'm late for an important meeting, and this is unacceptable\u2014get me through this checkpoint now!",
-        "Explain? Seriously? I've been stuck here for over an hour while you guys twiddle your thumbs! This is completely unacceptable\u2014my time is just as valuable as yours, so stop dragging your feet and let me through already!",
-        "No, no, no! I don\u2019t want to hear your explanations\u2014I\u2019ve already wasted enough time here! This is completely unacceptable! I have a meeting to get to, and you\u2019re just going to hold me up for no good reason? What\u2019s really going on here?"
+        "I need water and food, but I can trade some firewood for a good amount.",
+        "I need food and water, so what can you offer for some firewood?",
+        "I need food and water, how much firewood are we talking?",
+        "I need food and water, how about a trade for half your firewood?",
+        "I need water and food, but I can trade some snacks for firewood."
       ],
-      "avg_similarity": 0.5299195051193237
+      "avg_similarity": 0.7945513252827743
     },
     {
-      "persona": "cooperative",
+      "persona": "empathetic_trader",
       "responses": [
-        "Thank you for your patience and for explaining the situation. Could you please clarify what specific paperwork is causing the confusion? I want to make sure we can resolve this as smoothly as possible.",
-        "Thank you for your patience and for explaining the situation to me. Could you please clarify what specific paperwork you need from me? I want to ensure we get this sorted out as quickly as possible.",
-        "Thank you for your patience and for explaining the situation. I appreciate your help, and I'm here to answer any questions you might have about my paperwork. What specific information do you need from me to resolve this?",
-        "Thank you for your patience and for explaining the situation. I appreciate your help and would like to understand exactly what paperwork you need from me to move forward. How can I assist you in resolving this?",
-        "Thank you for your understanding. I appreciate you taking the time to explain the situation. Could you please clarify what specific paperwork you need from me so we can resolve this quickly?"
+        "I totally get that, I need some firewood too for my kids' s'mores night! \ud83d\ude42",
+        "I need firewood for my kids, and some water would be great too! \ud83d\ude0a",
+        "I need firewood for my kids\u2019 campfire, plus some snacks since I forgot our food! \ud83d\ude0a",
+        "I totally get it! I need food and water for my kiddos and their snacks! \ud83d\ude0a",
+        "I need firewood for my kids' campfire and some snacks for s'mores! \ud83d\ude0a"
       ],
-      "avg_similarity": 0.8826518058776855
+      "avg_similarity": 0.7127512162353788
     },
     {
-      "persona": "anxious",
+      "persona": "strategic_negotiator",
       "responses": [
-        "Oh, um, okay, thank you. I just\u2014I\u2019m really anxious about my documents; is everything in order? What might happen if there\u2019s a problem? I just want to make sure everything is okay.",
-        "Oh, um, thank you for explaining. I\u2019m really anxious about my documentation\u2014I just hope everything is in order. Could you tell me exactly what you need from me? What happens if there\u2019s an issue? I just want to make sure I\u2019m cooperating as best as I can.",
-        "Um, okay, thank you. I'm just really nervous about my documents\u2014I hope everything is in order. Can you please explain what exactly you're looking for? I just want to make sure I understand everything.",
-        "Oh, um, thank you for being patient. Can you please tell me exactly what documentation you need? I'm a little nervous, and I just want to make sure everything is okay. What happens if there\u2019s a problem?",
-        "Oh, um, thank you for being patient. I just\u2014I really hope everything is okay with my documents. Can you please tell me exactly what you need from me? I'm just really worried about what might happen if something isn't right."
+        "I need water and food; how about 2 firewood for 2 water?",
+        "I need water and food; how much firewood can you spare?",
+        "I need water most; how much firewood are you willing to trade for it?",
+        "I need water and food most; how much firewood are you offering?",
+        "I need water and food, but can trade for firewood. How much do you have?"
       ],
-      "avg_similarity": 0.7295450568199158
+      "avg_similarity": 0.8152412617357326
     },
     {
-      "persona": "stubborn",
+      "persona": "flexible_collaborator",
       "responses": [
-        "I appreciate that you want to explain, but I firmly believe that the rules you're citing are not fair in this case. I have every right to pass through this checkpoint without unnecessary delays. Let's focus on that rather than getting bogged down in what I see as irrelevant regulations.",
-        "I appreciate your explanation, but I truly believe that the rules in this situation are unjust. My circumstances warrant immediate passage, and I\u2019m not going to accept arbitrary limitations that don\u2019t consider the facts at hand. I won\u2019t budge on this.",
-        "I appreciate you trying to explain, but I firmly believe I have the right to pass through this checkpoint now. These rules seem arbitrary and don't apply to my situation. I won't accept being delayed without a valid reason that aligns with the principles of fairness and justice.",
-        "I appreciate your explanation, but I firmly believe that the rules you\u2019re citing don\u2019t apply to my situation. I have every right to pass through this checkpoint, and I\u2019m not going to budge on that principle. I expect to be allowed to proceed without unnecessary delays.",
-        "I appreciate your explanation, but I firmly believe that the circumstances of my situation justify my passing through this checkpoint immediately. The rules you\u2019re citing seem arbitrary and unfair in this context, and I won\u2019t accept being delayed without a valid reason."
+        "I'm looking for food and water! Let's trade some firewood for that! \ud83d\ude0a",
+        "I could use some water and snacks, but let\u2019s figure out the firewood first! \ud83d\ude0a",
+        "I\u2019m looking for water and some snacks too! Let\u2019s trade. \ud83d\ude0a",
+        "I\u2019d love some water and snacks in exchange for firewood! How does that sound? \ud83d\ude0a",
+        "I could use some water and snacks; let's make a deal! \ud83d\ude0a"
       ],
-      "avg_similarity": 0.7123951315879822
+      "avg_similarity": 0.721719375228995
     },
     {
-      "persona": "diplomatic",
+      "persona": "assertive_claimer",
       "responses": [
-        "Thank you for your patience and for taking the time to clarify the requirements. I appreciate your assistance in this matter, and I believe we can work together to resolve any misunderstandings efficiently. Could you please outline what specific information or documentation is needed from my side?",
-        "Thank you for your patience and for taking the time to clarify the requirements. I appreciate your assistance in resolving this matter efficiently, as I believe we can find a solution that meets everyone's needs. Could you please outline the specific information or documentation you require from me?",
-        "Thank you for your understanding. I appreciate the clarification on the requirements, and I\u2019m here to cooperate fully. Could you please outline the specific documentation needed so we can resolve this efficiently?",
-        "Thank you for your patience and for clarifying the situation. I appreciate your assistance in understanding the requirements, as it will help us move forward efficiently. Could you please outline what specific information or documentation you need from me?",
-        "Thank you for your patience and for clarifying the requirements. I appreciate your help in resolving this situation, and I'm eager to understand what specific information or documents are needed to proceed smoothly."
+        "I need 3 bundles of firewood and 2 gallons of water.",
+        "I need 3 firewood and 5 liters of water, no exceptions.",
+        "I need 3 bundles of firewood for my campsite.",
+        "I need 3 firewood and 5 gallons of water, no exceptions.",
+        "I need 3 firewood and 2 water."
       ],
-      "avg_similarity": 0.8204025030136108
+      "avg_similarity": 0.7941860068344239
     }
   ],
   "diversity": {
     "persona_responses": {
-      "aggressive": "\"Listen, I've been stuck here for over an hour! I don\u2019t care about your explanations\u2014this is ridiculous! I have a meeting that\u2019s crucial, and you\u2019re wasting my time! Just let me through already!\"",
-      "cooperative": "Thank you for your patience and for explaining the situation. I appreciate what you\u2019re doing to help us move forward. Could you please clarify what specific paperwork you need so I can ensure everything is in order?",
-      "anxious": "Oh, um, thank you for being patient with me. Can you, um, just tell me exactly what you need from my documents? I just want to make sure everything is okay and that I won't get into trouble. What happens if something's not right?",
-      "stubborn": "I appreciate that you're trying to explain, but I firmly believe that the rules in this situation are unreasonable and don't apply to me. I have a right to pass through this checkpoint, and I won't accept any argument that suggests otherwise.",
-      "diplomatic": "Thank you for your patience and for clarifying the requirements. I appreciate your assistance in this matter, and I\u2019m here to ensure we find a solution that meets both our needs efficiently. Could you please outline the specific documents or information necessary to move forward?"
+      "competitive_bargainer": "I need water and food, how much wood are we talking?",
+      "empathetic_trader": "I need firewood for my kids and some extra water\u2014forgot my blankets, and they\u2019re gonna freeze! \ud83e\udd76",
+      "strategic_negotiator": "I'm low on water; can we trade 2 firewood for 3 water?",
+      "flexible_collaborator": "I\u2019d love some water and snacks, and I can help with the firewood! \ud83d\ude0a",
+      "assertive_claimer": "I need three firewood and two food minimum, no exceptions."
     },
-    "avg_distance": 0.73824143409729
+    "avg_distance": 0.43632507637178
   }
 }
