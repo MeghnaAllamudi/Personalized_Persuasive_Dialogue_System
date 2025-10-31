@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "../../../Personalized_Persuasive_Dialogue_System"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../models"
+		},
+		{
+			"path": "../personas"
+		},
+		{
+			"path": "../data"
+		},
+		{
+			"path": "../experiments"
+		}
+	],
+	"settings": {}
+}

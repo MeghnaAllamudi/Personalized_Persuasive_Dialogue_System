@@ -1,0 +1,98 @@
+{
+  "random": {
+    "competitive_bargainer": {
+      "mean_reward": 2.337599206349206,
+      "std_reward": 1.1545484967874846,
+      "mean_sentiment": 0.22875,
+      "std_sentiment": 0.26160860555417514
+    },
+    "empathetic_trader": {
+      "mean_reward": 2.768295454545455,
+      "std_reward": 0.8954846941325737,
+      "mean_sentiment": 0.5205871212121213,
+      "std_sentiment": 0.3619504404490392
+    },
+    "strategic_negotiator": {
+      "mean_reward": 1.2899999999999998,
+      "std_reward": 0.8125730736370729,
+      "mean_sentiment": 0.10500000000000001,
+      "std_sentiment": 0.215
+    },
+    "flexible_collaborator": {
+      "mean_reward": 2.832936507936508,
+      "std_reward": 0.8476947343649529,
+      "mean_sentiment": 0.21284722222222224,
+      "std_sentiment": 0.3709401180521669
+    },
+    "assertive_claimer": {
+      "mean_reward": 0.013015873015873014,
+      "std_reward": 0.8322569919683895,
+      "mean_sentiment": 0.08,
+      "std_sentiment": 0.17349351572897473
+    }
+  },
+  "population_best": {
+    "competitive_bargainer": {
+      "mean_reward": 2.2354166666666666,
+      "std_reward": 0.8621582454966014,
+      "mean_sentiment": 0.265,
+      "std_sentiment": 0.40252329125157466
+    },
+    "empathetic_trader": {
+      "mean_reward": 1.972105654761905,
+      "std_reward": 1.0668865582165705,
+      "mean_sentiment": 0.23548611111111112,
+      "std_sentiment": 0.3316721410422023
+    },
+    "strategic_negotiator": {
+      "mean_reward": 1.1766666666666667,
+      "std_reward": 0.8948603242964792,
+      "mean_sentiment": 0.19,
+      "std_sentiment": 0.348245602987317
+    },
+    "flexible_collaborator": {
+      "mean_reward": 3.1397222222222227,
+      "std_reward": 0.8595037529812705,
+      "mean_sentiment": 0.41624999999999995,
+      "std_sentiment": 0.40543379545864205
+    },
+    "assertive_claimer": {
+      "mean_reward": -0.02404761904761905,
+      "std_reward": 0.6019530288814833,
+      "mean_sentiment": 0.12428571428571429,
+      "std_sentiment": 0.2593004718350461
+    }
+  },
+  "oracle": {
+    "competitive_bargainer": {
+      "mean_reward": 1.7933333333333337,
+      "std_reward": 1.2488358467878082,
+      "mean_sentiment": 0.03166666666666667,
+      "std_sentiment": 0.11357816691600546
+    },
+    "empathetic_trader": {
+      "mean_reward": 2.265104166666667,
+      "std_reward": 1.104580522752726,
+      "mean_sentiment": 0.3288244047619048,
+      "std_sentiment": 0.4785669774524259
+    },
+    "strategic_negotiator": {
+      "mean_reward": 1.4775,
+      "std_reward": 0.542960633932148,
+      "mean_sentiment": 0.21000000000000002,
+      "std_sentiment": 0.3279100486413919
+    },
+    "flexible_collaborator": {
+      "mean_reward": 3.8340972222222227,
+      "std_reward": 0.8595609058177233,
+      "mean_sentiment": 0.6508333333333334,
+      "std_sentiment": 0.22664368756069758
+    },
+    "assertive_claimer": {
+      "mean_reward": -0.044107142857142845,
+      "std_reward": 1.007161869754686,
+      "mean_sentiment": 0.09000000000000001,
+      "std_sentiment": 0.12257650672131262
+    }
+  }
+}
