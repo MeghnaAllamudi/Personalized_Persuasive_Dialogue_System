@@ -1,7 +1,7 @@
 import sys
 sys.path.append('.')
 from models.strategy_generator import StrategyPromptedGenerator
-from models.casino_persona_simulator import CasinoPersonaSimulator
+from models.persona_simulator import CasinoPersonaSimulator
 
 def test_conversation(persona_type, strategy_sequence):
     """Test a full conversation with strategy-persona interaction"""

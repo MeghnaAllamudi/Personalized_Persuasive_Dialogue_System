@@ -1,7 +1,7 @@
 import sys
 sys.path.append('.')
 from models.strategy_generator import StrategyPromptedGenerator
-from models.casino_persona_simulator import CasinoPersonaSimulator
+from models.persona_simulator import CasinoPersonaSimulator
 import random
 import json
 import numpy as np

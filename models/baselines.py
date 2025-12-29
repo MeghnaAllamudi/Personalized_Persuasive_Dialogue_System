@@ -110,6 +110,20 @@ class MostCommonStrategyAgent:
         return f"Most Common ({self.most_common})"
 
 
+class VanillaLLMAgent:
+    """Baseline: No strategy guidance - just prompt LLM to persuade (similar to PersuaBot)"""
+    
+    def __init__(self):
+        print("Vanilla LLM: No strategy selection (direct persuasion prompting)")
+    
+    def select_strategies(self, conversation_state):
+        """Return empty list to signal no strategy guidance"""
+        return []
+    
+    def name(self):
+        return "Vanilla LLM (No Strategy)"
+
+
 # Test baselines
 if __name__ == '__main__':
     print("Initializing baseline agents...\n")
@@ -118,6 +132,7 @@ if __name__ == '__main__':
     population_agent = PopulationBestAgent()
     oracle_agent = PersonaSpecificAgent()
     common_agent = MostCommonStrategyAgent()
+    vanilla_agent = VanillaLLMAgent()
     
     print("\n" + "="*80)
     print("Testing strategy selection:")
@@ -129,3 +144,4 @@ if __name__ == '__main__':
     print(f"{population_agent.name()}: {population_agent.select_strategies(test_state)}")
     print(f"{oracle_agent.name()} [competitive_bargainer]: {oracle_agent.select_strategies(test_state, 'competitive_bargainer')}")
     print(f"{common_agent.name()}: {common_agent.select_strategies(test_state)}")
+    print(f"{vanilla_agent.name()}: {vanilla_agent.select_strategies(test_state)}")

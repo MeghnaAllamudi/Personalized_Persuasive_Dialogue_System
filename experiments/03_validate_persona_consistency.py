@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.append('.')
-from models.casino_persona_simulator import CasinoPersonaSimulator
+from models.persona_simulator import CasinoPersonaSimulator
 from dotenv import load_dotenv
 from openai import OpenAI
 from sklearn.metrics.pairwise import cosine_similarity

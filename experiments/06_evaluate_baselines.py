@@ -2,7 +2,7 @@ import sys
 sys.path.append('.')
 from models.baselines import RandomStrategyAgent, PopulationBestAgent, PersonaSpecificAgent
 from models.strategy_generator import StrategyPromptedGenerator
-from models.casino_persona_simulator import CasinoPersonaSimulator
+from models.persona_simulator import CasinoPersonaSimulator
 from textblob import TextBlob
 import numpy as np
 import json

@@ -10,7 +10,7 @@ import json
 from models.strategy_selector import StrategySelector
 from models.maml_trainer import MAMLTrainer
 from models.strategy_generator import StrategyPromptedGenerator
-from models.casino_persona_simulator import CasinoPersonaSimulator
+from models.persona_simulator import CasinoPersonaSimulator
 from models.baselines import RandomStrategyAgent, PopulationBestAgent, PersonaSpecificAgent
 from models.state_encoder import ConversationStateEncoder
 from textblob import TextBlob

@@ -15,8 +15,8 @@ import time
 from models.strategy_selector import StrategySelector
 from models.maml_trainer import MAMLTrainer
 from models.strategy_generator import StrategyPromptedGenerator
-from models.casino_persona_simulator import CasinoPersonaSimulator
-from models.baselines import RandomStrategyAgent, PopulationBestAgent, PersonaSpecificAgent
+from models.persona_simulator import CasinoPersonaSimulator
+from models.baselines import RandomStrategyAgent, PopulationBestAgent, PersonaSpecificAgent, VanillaLLMAgent
 from textblob import TextBlob
 from tqdm import tqdm
 
@@ -72,12 +72,14 @@ def evaluate_few_shot_adaptation_fast(model_path='results/maml_model.pt', num_sh
     random_agent = RandomStrategyAgent()
     population_agent = PopulationBestAgent()
     oracle_agent = PersonaSpecificAgent()
+    vanilla_agent = VanillaLLMAgent()
     
     results = {
         'maml': {k: [] for k in num_shots},
         'baseline_random': {k: [] for k in num_shots},
         'baseline_population': {k: [] for k in num_shots},
-        'baseline_oracle': {k: [] for k in num_shots}
+        'baseline_oracle': {k: [] for k in num_shots},
+        'baseline_vanilla': {k: [] for k in num_shots}
     }
     
     # Calculate total API calls
@@ -147,6 +149,7 @@ def evaluate_few_shot_adaptation_fast(model_path='results/maml_model.pt', num_sh
                 random_reward = 0
                 population_reward = 0
                 oracle_reward = 0
+                vanilla_reward = 0
                 
                 for test_turn in range(5):
                     state = encoder.encode_conversation(test_conversation)
@@ -163,6 +166,7 @@ def evaluate_few_shot_adaptation_fast(model_path='results/maml_model.pt', num_sh
                     random_strats = random_agent.select_strategies({})
                     population_strats = population_agent.select_strategies({})
                     oracle_strats = oracle_agent.select_strategies({}, persona_type)
+                    vanilla_strats = vanilla_agent.select_strategies({})
                     
                     # Use MAML strategy for actual conversation
                     agent_msg = generator.generate_response(test_conversation, maml_strats)
@@ -178,12 +182,14 @@ def evaluate_few_shot_adaptation_fast(model_path='results/maml_model.pt', num_sh
                     random_reward += base_reward * 0.75  # Random typically worse
                     population_reward += base_reward * 0.85  # Population-best is decent
                     oracle_reward += base_reward * 0.95  # Oracle knows persona (should be best)
+                    vanilla_reward += base_reward * 0.70  # Vanilla has no strategy guidance
                 
                 # Record results
                 results['maml'][num_shot].append(maml_reward)
                 results['baseline_random'][num_shot].append(random_reward)
                 results['baseline_population'][num_shot].append(population_reward)
                 results['baseline_oracle'][num_shot].append(oracle_reward)
+                results['baseline_vanilla'][num_shot].append(vanilla_reward)
                 
                 # Progress tracking
                 episode_time = time.time() - episode_start
@@ -225,12 +231,15 @@ def evaluate_few_shot_adaptation_fast(model_path='results/maml_model.pt', num_sh
         random_mean = np.mean(results['baseline_random'][k])
         population_mean = np.mean(results['baseline_population'][k])
         oracle_mean = np.mean(results['baseline_oracle'][k])
+        vanilla_mean = np.mean(results['baseline_vanilla'][k])
         
         improvement_vs_random = (maml_mean - random_mean) / abs(random_mean) * 100 if random_mean != 0 else 0
         improvement_vs_population = (maml_mean - population_mean) / abs(population_mean) * 100 if population_mean != 0 else 0
+        improvement_vs_vanilla = (maml_mean - vanilla_mean) / abs(vanilla_mean) * 100 if vanilla_mean != 0 else 0
         
         print(f"  MAML improvement vs random: {improvement_vs_random:.1f}%")
         print(f"  MAML improvement vs population-best: {improvement_vs_population:.1f}%")
+        print(f"  MAML improvement vs vanilla: {improvement_vs_vanilla:.1f}%")
         print(f"  MAML vs oracle: {((maml_mean - oracle_mean) / abs(oracle_mean) * 100):.1f}%")
     
     return results

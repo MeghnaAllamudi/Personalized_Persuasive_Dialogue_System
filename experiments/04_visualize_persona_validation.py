@@ -33,7 +33,7 @@ axes[0].tick_params(axis='x', rotation=45)
 
 # Panel B: t-SNE visualization of persona embeddings
 # Re-generate embeddings for visualization  
-from models.casino_persona_simulator import CasinoPersonaSimulator
+from models.persona_simulator import CasinoPersonaSimulator
 from openai import OpenAI
 from dotenv import load_dotenv
 import os

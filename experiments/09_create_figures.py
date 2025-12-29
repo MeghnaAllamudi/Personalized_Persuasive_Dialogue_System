@@ -30,6 +30,9 @@ methods = {
     'baseline_random': ('Random Selection', 'coral', 's')
 }
 
+if 'baseline_vanilla' in available_baselines:
+    methods['baseline_vanilla'] = ('Vanilla LLM', 'gray', 'x')
+    print("Using Vanilla LLM baseline")
 if 'baseline_population' in available_baselines:
     methods['baseline_population'] = ('Population-Best', 'lightgreen', '^')
     print("Using Population-Best baseline")
@@ -74,7 +77,7 @@ model.eval()
 
 from models.maml_trainer import MAMLTrainer
 from models.state_encoder import ConversationStateEncoder
-from models.persona_simulator import PersonaSimulator
+from models.persona_simulator import CasinoPersonaSimulator
 
 trainer = MAMLTrainer(model, inner_lr=0.01, device=device)
 encoder = ConversationStateEncoder()
@@ -88,7 +91,7 @@ strategy_preferences = np.zeros((len(persona_types), len(strategies)))
 for p_idx, persona_type in enumerate(persona_types):
     # Generate support data
     support_data = []
-    simulator = PersonaSimulator(persona_type, model="gpt-4o-mini")
+    simulator = CasinoPersonaSimulator(persona_type, model="gpt-4o-mini")
     
     # Collect 3 turns
     from models.strategy_generator import StrategyPromptedGenerator

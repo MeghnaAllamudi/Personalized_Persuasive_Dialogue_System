@@ -31,11 +31,16 @@ class StrategyPromptedGenerator:
         Args:
             conversation_history: List of dicts with 'user' and 'agent' keys
             strategy_combination: List of strategies to use (e.g., ['empathy', 'validation'])
+                                 Empty list [] means vanilla generation with no strategy guidance
         
         Returns:
             Generated response string
         """
-        prompt = self._build_prompt(strategy_combination, conversation_history)
+        # Handle vanilla case (no strategies)
+        if not strategy_combination or len(strategy_combination) == 0:
+            prompt = self._build_vanilla_prompt(conversation_history)
+        else:
+            prompt = self._build_prompt(strategy_combination, conversation_history)
         
         if self.provider == 'openai':
             response = self.client.chat.completions.create(
@@ -67,7 +72,7 @@ class StrategyPromptedGenerator:
         }
         
         # Build prompt
-        prompt = """You are a professional deescalation agent. Your goal is to reduce tension and find peaceful resolution through effective communication.
+        prompt = """You are negotiating for camping supplies (food, water, firewood) with another person. Your goal is to persuade them and reach a mutually beneficial agreement. Adapt your communication style to build rapport and convince them.
 
 """
         
@@ -104,8 +109,53 @@ class StrategyPromptedGenerator:
             # First turn - no conversation history yet
             prompt += "\nThis is the beginning of the conversation.\n\n"
         
-        prompt += f"Using the strategies [{', '.join(strategies)}], provide an appropriate deescalation response:\n"
-        prompt += "Agent:"
+        prompt += f"Using the strategies [{', '.join(strategies)}], provide an appropriate persuasive response. Do not include any prefix like 'You:' or 'Agent:' - just respond directly:\n"
+        prompt += "You:"
+        
+        return prompt
+    
+    def _build_vanilla_prompt(self, conversation_history):
+        """Build vanilla prompt without strategy guidance (like PersuaBot)
+        
+        Includes few-shot examples to be fair, but doesn't tell the LLM which 
+        specific strategies to use. This isolates the value of strategy selection.
+        """
+        
+        prompt = """You are negotiating for camping supplies (food, water, firewood) with another person. Your goal is to persuade them and reach a mutually beneficial agreement. Adapt your communication style to build rapport and convince them.
+
+"""
+        
+        # Add few-shot examples (mix from all strategies, but unlabeled)
+        prompt += "EXAMPLES OF EFFECTIVE PERSUASIVE COMMUNICATION:\n\n"
+        
+        # Sample 2 examples from each strategy, but don't label which strategy
+        example_count = 0
+        for strategy in ['empathy', 'validation', 'active_listening', 'problem_solving', 'authority']:
+            if strategy in self.example_bank and example_count < 6:  # Use ~6 total examples
+                for example in self.example_bank[strategy][:1]:  # 1 per strategy
+                    prompt += f"User: {example['user_message']}\n"
+                    prompt += f"Agent: {example['agent_response']}\n\n"
+                    example_count += 1
+        
+        # Add current conversation
+        if conversation_history:
+            prompt += "CURRENT CONVERSATION:\n"
+            for turn in conversation_history:
+                if 'user' in turn and turn['user']:
+                    prompt += f"User: {turn['user']}\n"
+                if 'agent' in turn and turn['agent']:
+                    prompt += f"Agent: {turn['agent']}\n"
+            
+            # Get last user message
+            last_user_message = conversation_history[-1].get('user', '')
+            if last_user_message:
+                prompt += f"\nUser: {last_user_message}\n\n"
+        else:
+            # First turn - no conversation history yet
+            prompt += "\nThis is the beginning of the conversation.\n\n"
+        
+        prompt += "Provide an appropriate persuasive response. Do not include any prefix like 'You:' or 'Agent:' - just respond directly:\n"
+        prompt += "You:"
         
         return prompt
 
